@@ -20,7 +20,7 @@ public class WeddingGuest {
     private String firstName;
 
     @Column(unique = true)
-    private String email;
+    private String emailAddress;
 
     @OneToOne
     @JoinColumn(name = "guestlist_id", referencedColumnName = "id")
@@ -29,11 +29,11 @@ public class WeddingGuest {
     public WeddingGuest() {
     }
 
-    public WeddingGuest(Long id, String lastName, String firstName, String email) {
+    public WeddingGuest(Long id, String lastName, String firstName, String emailAddress) {
         this.id = id;
         this.lastName = lastName;
         this.firstName = firstName;
-        this.email = email;
+        this.emailAddress = emailAddress;
     }
 
     @Override
@@ -42,7 +42,7 @@ public class WeddingGuest {
                 "id=" + id +
                 ", lastName='" + lastName + '\'' +
                 ", firstName='" + firstName + '\'' +
-                ", email='" + email + '\'' +
+                ", email='" + emailAddress + '\'' +
                 '}';
     }
 
@@ -54,8 +54,8 @@ public class WeddingGuest {
         this.firstName = firstName;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setEmailAddress(String email) {
+        this.emailAddress = emailAddress;
     }
 
     public String getFirstName() {
@@ -66,8 +66,8 @@ public class WeddingGuest {
         return lastName;
     }
 
-    public String getEmail() {
-        return email;
+    public String getEmailAddress() {
+        return emailAddress;
     }
 
 
