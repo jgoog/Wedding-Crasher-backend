@@ -1,5 +1,6 @@
 package com.example.weddingcrasher.weddingcrasherback.security;
 
+import com.example.weddingcrasher.weddingcrasherback.model.GuestList;
 import com.example.weddingcrasher.weddingcrasherback.model.WeddingGuest;
 import com.example.weddingcrasher.weddingcrasherback.service.GuestService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class MyUserDetailsService implements UserDetailsService {
+
 
     private GuestService guestService;
 
