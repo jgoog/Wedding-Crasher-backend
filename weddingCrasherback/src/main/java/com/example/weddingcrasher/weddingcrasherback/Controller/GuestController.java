@@ -11,25 +11,25 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-//@RestController
-//@RequestMapping(path = "/auth/users")
-//public class GuestController {
-//
-//    private GuestService guestService;
-//
-//    @Autowired
-//    private AuthenticationManager authenticationManager;
-//
-//    @Autowired
-//    private UserDetailsService userDetailsService;
-//
-//    @Autowired
-//    public void setGuestService (GuestService guestService){this.guestService =guestService;}
-//
-//    @PostMapping(path = "/login")
-//    public ResponseEntity<?> loginUser(@RequestBody LoginRequest loginRequest){ //returns login to user
-//        return guestService.loginUser(loginRequest);
-//    }
+@RestController
+@RequestMapping(path = "/auth/users")
+public class GuestController {
+
+    private GuestService guestService;
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
+    @Autowired
+    private UserDetailsService userDetailsService;
+
+    @Autowired
+    public void setGuestService (GuestService guestService){this.guestService =guestService;}
+
+    @PostMapping(path = "/login/")
+    public ResponseEntity<?> loginUser(@RequestBody LoginRequest loginRequest){ //returns login to user
+        return guestService.loginUser(loginRequest);
+    }
 
 
-//}
+}

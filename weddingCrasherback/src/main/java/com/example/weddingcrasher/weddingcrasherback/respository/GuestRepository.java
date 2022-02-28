@@ -1,15 +1,15 @@
 package com.example.weddingcrasher.weddingcrasherback.respository;
 
+import com.example.weddingcrasher.weddingcrasherback.model.GuestList;
 import com.example.weddingcrasher.weddingcrasherback.model.WeddingGuest;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface GuestRepository extends JpaRepository<WeddingGuest, Long> {
+public interface GuestRepository extends JpaRepository<GuestList, Long> {
 
     // to register
-    boolean existsByEmailAddress(String userEmailAddress);
+//    boolean existsByEmailAddress(String userEmailAddress);
 
 
     //to login
-    WeddingGuest findUserByEmailAddress(String emailAddress);
-
+    GuestList findByLastName(String lastName);
 }

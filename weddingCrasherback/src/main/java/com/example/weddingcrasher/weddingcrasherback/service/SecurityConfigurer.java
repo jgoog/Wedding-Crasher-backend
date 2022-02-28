@@ -14,6 +14,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.context.WebApplicationContext;
 
@@ -38,28 +40,24 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
     private DataSource dataSource;
 
 
-    @Autowired
-    public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
-        auth.jdbcAuthentication()
-                .dataSource(dataSource)
-                .usersByUsernameQuery("select username, password, enabled from users where username=?")
-                .authoritiesByUsernameQuery("select username, role from users where username=?")
-        ;
+
+    @Bean
+    public PasswordEncoder encoder() {
+        return new BCryptPasswordEncoder();
     }
 
 
-
-//    @Override
-//    protected void configure(HttpSecurity http) throws Exception {
-//        // only allowed urls with out JWT
-//        http.authorizeRequests().antMatchers(
-//                        "/auth/users/", "/auth/users/login/", "/auth/users/register/", "/api/hello-world/").permitAll()
-//                .anyRequest().authenticated()
-//                .and().sessionManagement()
-//                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-//                .and().csrf().disable();
-//        http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class); // for token
-//    }
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        // only allowed urls with out JWT
+        http.authorizeRequests().antMatchers(
+                        "/auth/users/", "/auth/users/login/", "/auth/users/register/", "/api/hello-world/").permitAll()
+                .anyRequest().authenticated()
+                .and().sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and().csrf().disable();
+        http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class); // for token
+    }
 
     @Override
     @Bean  public AuthenticationManager authenticationManagerBean() throws Exception {

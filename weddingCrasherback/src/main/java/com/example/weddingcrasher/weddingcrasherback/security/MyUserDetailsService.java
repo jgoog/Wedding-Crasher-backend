@@ -19,8 +19,8 @@ public class MyUserDetailsService implements UserDetailsService {
     public void setGuestService(GuestService guestService){ this.guestService = guestService;}
 
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        WeddingGuest guest = guestService.findUserByEmailAddress(email);
+    public UserDetails loadUserByUsername(String lastName) throws UsernameNotFoundException {
+        GuestList guest = guestService.findByLastName(lastName);
         return new MyUserDetails(guest);
     }
 }

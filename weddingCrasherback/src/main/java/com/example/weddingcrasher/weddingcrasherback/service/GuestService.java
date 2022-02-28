@@ -1,7 +1,7 @@
 package com.example.weddingcrasher.weddingcrasherback.service;
+import com.example.weddingcrasher.weddingcrasherback.model.GuestList;
 import com.example.weddingcrasher.weddingcrasherback.model.Request.LoginRequest;
 import com.example.weddingcrasher.weddingcrasherback.model.Response.LoginResponse;
-import com.example.weddingcrasher.weddingcrasherback.model.WeddingGuest;
 import com.example.weddingcrasher.weddingcrasherback.respository.GuestRepository;
 import com.example.weddingcrasher.weddingcrasherback.security.JWTUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +41,6 @@ public class GuestService {
     }
 
 
-    public WeddingGuest findUserByEmailAddress(String email) {return guestRepository.findUserByEmailAddress(email);}
+    public GuestList findByLastName(String lastName){return guestRepository.findByLastName(lastName);}
 
 }

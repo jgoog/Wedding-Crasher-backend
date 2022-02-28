@@ -1,8 +1,10 @@
 package com.example.weddingcrasher.weddingcrasherback.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.*;
 
+@Repository
 @Entity
 @Table(name = "guestlist")
 
@@ -42,6 +44,13 @@ public class GuestList {
         return lastName;
     }
 
+    public WeddingGuest getWeddingGuest() {
+        return weddingGuest;
+    }
+
+    public void setWeddingGuest(WeddingGuest weddingGuest) {
+        this.weddingGuest = weddingGuest;
+    }
 
     @Override
     public String toString() {
