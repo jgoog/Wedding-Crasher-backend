@@ -3,16 +3,17 @@ package com.example.weddingcrasher.weddingcrasherback.model.Request;
 public class LoginRequest {
 
     private String email;
-
-    private String lastName;
+    private String password;
 
 
     public String getEmail() {
         return email;
     }
 
-    public String getLastName(){
-        return lastName;
+
+    public String getPassword() {
+        return password;
     }
+
 
 }

@@ -1,6 +1,6 @@
 package com.example.weddingcrasher.weddingcrasherback.service;
 
-import com.example.weddingcrasher.weddingcrasherback.security.JWTRequestFilter;
+import com.example.weddingcrasher.weddingcrasherback.security.JwtRequestFilter;
 import com.example.weddingcrasher.weddingcrasherback.security.MyUserDetails;
 import com.example.weddingcrasher.weddingcrasherback.security.MyUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,12 +19,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.context.WebApplicationContext;
 
-import javax.sql.DataSource;
-
-
 @EnableWebSecurity
 public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
-
 
     private MyUserDetailsService myUserDetailsService;
 
@@ -33,25 +29,27 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
         this.myUserDetailsService = myUserDetailsService;
     }
 
-    @Autowired
-    private JWTRequestFilter jwtRequestFilter;
 
     @Autowired
-    private DataSource dataSource;
+    private JwtRequestFilter jwtRequestFilter;
 
 
+    // step1
 
+    /**
+     * We use the PasswordEncoder that is defined in the Spring Security configuration to encode the password. * @return
+     */
     @Bean
     public PasswordEncoder encoder() {
         return new BCryptPasswordEncoder();
     }
 
-
+    // step2
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         // only allowed urls with out JWT
         http.authorizeRequests().antMatchers(
-                        "/auth/users/", "/auth/users/login/", "/auth/users/register/", "/api/hello-world/").permitAll()
+                        "/auth/users/", "/auth/users/login/", "/auth/users/register/", "/api/test-world/").permitAll()
                 .anyRequest().authenticated()
                 .and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
@@ -76,5 +74,6 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
         return (MyUserDetails) SecurityContextHolder.getContext().getAuthentication()
                 .getPrincipal();
     }
+
 
 }

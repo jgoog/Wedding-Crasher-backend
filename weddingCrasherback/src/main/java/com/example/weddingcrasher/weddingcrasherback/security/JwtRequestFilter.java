@@ -1,5 +1,7 @@
 package com.example.weddingcrasher.weddingcrasherback.security;
 
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -15,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Component
-public class JWTRequestFilter extends OncePerRequestFilter {
+public class JwtRequestFilter extends OncePerRequestFilter {
 
     @Autowired
     private MyUserDetailsService myUserDetailsService;
@@ -23,6 +25,8 @@ public class JWTRequestFilter extends OncePerRequestFilter {
     @Autowired
     private JWTUtils jwtUtils;
 
+    //When any api will be called this method will be called first and this will extract
+    // Token from header pass to JWT Util calls for token details extraction
     @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest,
                                     HttpServletResponse httpServletResponse, FilterChain filterChain)
@@ -52,6 +56,6 @@ public class JWTRequestFilter extends OncePerRequestFilter {
             }
         }
         filterChain.doFilter(httpServletRequest, httpServletResponse);
-
     }
 }
+

@@ -1,26 +1,29 @@
 package com.example.weddingcrasher.weddingcrasherback.security;
 
-import com.example.weddingcrasher.weddingcrasherback.model.GuestList;
-import com.example.weddingcrasher.weddingcrasherback.model.WeddingGuest;
-import com.example.weddingcrasher.weddingcrasherback.service.GuestService;
+
+
+import com.example.weddingcrasher.weddingcrasherback.model.User;
+import com.example.weddingcrasher.weddingcrasherback.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+
 @Service
 public class MyUserDetailsService implements UserDetailsService {
 
-
-    private GuestService guestService;
+    private UserService userService;
 
     @Autowired
-    public void setGuestService(GuestService guestService){ this.guestService = guestService;}
+    public void setUserService(UserService userService){
+        this.userService = userService;
+    }
 
     @Override
-    public UserDetails loadUserByUsername(String lastName) throws UsernameNotFoundException {
-        GuestList guest = guestService.findByLastName(lastName);
-        return new MyUserDetails(guest);
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        User user = userService.findUserByEmailAddress(email);
+        return new MyUserDetails(user);
     }
 }

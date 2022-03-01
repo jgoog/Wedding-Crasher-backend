@@ -1,7 +1,8 @@
 package com.example.weddingcrasher.weddingcrasherback.Controller;
 
+
 import com.example.weddingcrasher.weddingcrasherback.model.Request.LoginRequest;
-import com.example.weddingcrasher.weddingcrasherback.service.GuestService;
+import com.example.weddingcrasher.weddingcrasherback.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -13,9 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(path = "/auth/users")
-public class GuestController {
+public class UserController {
 
-    private GuestService guestService;
+    private UserService userService;
 
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -24,12 +25,23 @@ public class GuestController {
     private UserDetailsService userDetailsService;
 
     @Autowired
-    public void setGuestService (GuestService guestService){this.guestService =guestService;}
+    public void setUserService(UserService userService){this.userService = userService;}
 
-    @PostMapping(path = "/login/")
+
+
+    @PostMapping("/login/")
     public ResponseEntity<?> loginUser(@RequestBody LoginRequest loginRequest){ //returns login to user
-        return guestService.loginUser(loginRequest);
+        return userService.loginUser(loginRequest);
     }
+
+//    @PostMapping(path = "/user/{userId}/profile/")
+//    public UserProfile createProfile(@PathVariable(value = "userId")Long userId, @RequestBody UserProfile userProfileObject){
+//        return userService.createProfile(userId, userProfileObject);
+//    }
+
+
+
+
 
 
 }

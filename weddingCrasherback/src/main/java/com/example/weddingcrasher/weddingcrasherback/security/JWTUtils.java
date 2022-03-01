@@ -14,7 +14,7 @@ import java.util.function.Function;
 
 @Service
 public class JWTUtils {
-    String SECRET_KEY = "TestKey"; //Secret key to make token
+    String SECRET_KEYS = "MyKey"; //Secret key to make token
 
     public String generateToken(UserDetails userDetails) {
         Map<String, Object> claims = new HashMap<>();
@@ -25,7 +25,7 @@ public class JWTUtils {
     private String createToken(Map<String, Object> claims, String username) {
         return Jwts.builder().setClaims(claims).setSubject(username).setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10))
-                .signWith(SignatureAlgorithm.HS256, SECRET_KEY).compact();
+                .signWith(SignatureAlgorithm.HS256, SECRET_KEYS).compact();
     }
 
     //Token Validation
@@ -51,7 +51,7 @@ public class JWTUtils {
 
     //Claim Extraction
     private Claims extractAllClaims(String token) {
-        return Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
+        return Jwts.parser().setSigningKey(SECRET_KEYS).parseClaimsJws(token).getBody();
     }
 
     public <T> T extractClaims(String token, Function<Claims, T> claimResolver) {

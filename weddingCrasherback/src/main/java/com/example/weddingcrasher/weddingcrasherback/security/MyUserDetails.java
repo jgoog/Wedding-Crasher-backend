@@ -1,7 +1,8 @@
 package com.example.weddingcrasher.weddingcrasherback.security;
 
-import com.example.weddingcrasher.weddingcrasherback.model.GuestList;
-import com.example.weddingcrasher.weddingcrasherback.model.WeddingGuest;
+
+
+import com.example.weddingcrasher.weddingcrasherback.model.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -10,13 +11,13 @@ import java.util.HashSet;
 
 public class MyUserDetails implements UserDetails {
 
-    private WeddingGuest weddingGuest;
-    private GuestList guestList;
-    private String emailAddress;
+    private User user;
+    private String userName;
     private String password;
+    private String emailAddress;
 
-    public MyUserDetails(GuestList guestList) {
-        this.guestList = guestList;
+    public MyUserDetails(User user) {
+        this.user = user;
     }
 
     @Override
@@ -24,18 +25,15 @@ public class MyUserDetails implements UserDetails {
         return new HashSet<GrantedAuthority>();
     }
 
-
+    @Override
+    public String getPassword() {
+        return user.getPassword();
+    }
 
     @Override
     public String getUsername() {
-        return weddingGuest.getEmailAddress();
+        return user.getEmailAddress();
     }
-    @Override
-    public String getPassword() {
-        return guestList.getLastName();
-    }
-
-
 
     @Override
     public boolean isAccountNonExpired() {
@@ -57,8 +55,8 @@ public class MyUserDetails implements UserDetails {
         return true;
     }
 
-    public WeddingGuest getWeddingGuest() {
-        return weddingGuest;
+    public User getUser() {
+        return user;
     }
 
 
