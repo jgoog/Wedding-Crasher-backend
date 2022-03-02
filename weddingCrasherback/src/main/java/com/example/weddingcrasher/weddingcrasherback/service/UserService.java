@@ -7,14 +7,18 @@ import com.example.weddingcrasher.weddingcrasherback.model.User;
 import com.example.weddingcrasher.weddingcrasherback.repository.UserRepository;
 import com.example.weddingcrasher.weddingcrasherback.security.JWTUtils;
 
+import com.example.weddingcrasher.weddingcrasherback.security.MyUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class UserService {
@@ -67,7 +71,9 @@ public class UserService {
 //    }
 
 
-
+    public List<User> findAllUsers(){
+        return userRepository.findAll();
+    }
 
     public User findUserByEmailAddress(String email) {
         return userRepository.findUserByEmailAddress(email);

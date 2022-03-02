@@ -18,6 +18,39 @@ public class User {
     @Column
     private String userName;
 
+    @Column
+    private String firstName;
+
+    @Column
+    private String LastName;
+
+    @Column
+    private String table;
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return LastName;
+    }
+
+    public void setLastName(String lastName) {
+        LastName = lastName;
+    }
+
+    public String getTable() {
+        return table;
+    }
+
+    public void setTable(String table) {
+        this.table = table;
+    }
+
     @Column(nullable = false)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
@@ -30,13 +63,15 @@ public class User {
     public User() {
     }
 
-    public User(Long id, String userName, String password, String emailAddress) {
+    public User(Long id, String userName, String firstName, String lastName, String table, String password, String emailAddress) {
         this.id = id;
         this.userName = userName;
+        this.firstName = firstName;
+        LastName = lastName;
+        this.table = table;
         this.password = password;
         this.emailAddress = emailAddress;
     }
-
 
     public Long getId() {
         return id;
