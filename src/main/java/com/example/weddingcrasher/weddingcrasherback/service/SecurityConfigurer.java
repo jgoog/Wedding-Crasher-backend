@@ -55,13 +55,13 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         // only allowed urls with out JWT
-        http.cors();
+        http.cors().and().csrf().disable();
         http.authorizeRequests().antMatchers(
                         "/auth/users/", "/auth/users/login/", "/auth/users/register/", "/api/test-world/").permitAll()
                 .anyRequest().authenticated()
                 .and().sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and().csrf().disable();
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
 
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class); // for token
     }
